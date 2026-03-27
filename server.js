@@ -5,10 +5,24 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
 
-// Allow your specific portfolio website to talk to this server securely
+// --- SECURE CORS SETTINGS ---
+const allowedOrigins = [
+    'https://mahad-ikram.github.io', 
+    'https://mahadikram.com',
+    'http://localhost:5500', 
+    'http://127.0.0.1:5500'
+];
+
 app.use(cors({
-    origin: '*' // We will lock this down to 'https://mahad-ikram.github.io' later for extra security
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 }));
+// ----------------------------
 app.use(express.json());
 
 // Initialize Gemini API securely using the hidden environment variable

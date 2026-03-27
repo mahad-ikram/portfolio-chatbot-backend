@@ -30,7 +30,7 @@ app.post('/chat', async (req, res) => {
         }
 
         // Using Gemini 1.5 Flash for lightning-fast chatbot responses
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
         
         // We combine the system instruction with the user's message so the AI never forgets who it is
         const prompt = `${systemInstruction}\n\nClient asking: ${userMessage}\nAI Assistant Response:`;
